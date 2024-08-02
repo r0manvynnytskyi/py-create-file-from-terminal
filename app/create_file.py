@@ -1,22 +1,22 @@
 import os
 import sys
 import datetime
-from typing import List, Optional
 
 
-def create_directories(path_parts: List[str]) -> None:
-    path = os.path.join(*path_parts)
-    os.makedirs(path, exist_ok=True)
-    print(f"Created directories: {path}")
+def create_directories(path_parts: str) -> None:
+    base_path = os.path.join("app", *path_parts)
+    os.makedirs(base_path, exist_ok=True)
+    print(f"Created directories: {base_path}")
 
 
-def create_file(file_name: str, dir_path: Optional[List[str]] = None) -> None:
+def create_file(file_name: str, dir_path: list[str] = None) -> None:
     if dir_path:
-        full_path = os.path.join(*dir_path, file_name)
+        full_path = os.path.join("app", *dir_path, file_name)
         os.makedirs(os.path.dirname(full_path), exist_ok=True)
     else:
-        full_path = file_name
+        full_path = os.path.join("app", file_name)
 
+    # Check if file exists
     file_exists = os.path.exists(full_path)
 
     with open(full_path, "a") as f:
